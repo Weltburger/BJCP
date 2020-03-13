@@ -23,6 +23,19 @@ namespace Blackjack
             makeBet(a, Convert.ToInt32(a.BetGame.Text), p); // проверка ставки
             if (pBet != 0)
             {
+                int randomCard5 = 8;
+                Card card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 20;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 32;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 44;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+
                 GlobalData.InGameState = true;
                 this.betButtonsState(a);
                 a.EndBtnGame.Enabled = true;

@@ -23,6 +23,19 @@ namespace Blackjack
             makeBet(a, Convert.ToInt32(a.BetGame.Text), p); // проверка ставки
             if (pBet != 0)
             {
+                int randomCard5 = 8;
+                Card card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 20;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 32;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+                randomCard5 = 44;
+                card5 = deck.getDeckCard(randomCard5);
+                deck.popCard(card5);
+
                 GlobalData.InGameState = true;
                 this.betButtonsState(a);
                 a.EndBtnGame.Enabled = true;
@@ -35,21 +48,21 @@ namespace Blackjack
                 #region init player
                 int randomCard1 = selectRandomCard(deck.getDeck(), random);
                 Card card1 = deck.getDeckCard(randomCard1);
-                while (card1.Name == "Ten Spades" || card1.Name == "Ten Diamonds" || card1.Name == "Ten Clubs" || card1.Name == "Ten Hearts")
+                /*while (card1.Name == "Ten Spades" || card1.Name == "Ten Diamonds" || card1.Name == "Ten Clubs" || card1.Name == "Ten Hearts")
                 {
                     randomCard1 = selectRandomCard(deck.getDeck(), random);
                     card1 = deck.getDeckCard(randomCard1);
-                }
+                }*/
                 p.addUserCards(randomCard1);
                 deck.popCard(card1);
 
                 int randomCard2 = selectRandomCard(deck.getDeck(), random);
                 Card card2 = deck.getDeckCard(randomCard2);
-                while (card2.Name == "Ten Spades" || card2.Name == "Ten Diamonds" || card2.Name == "Ten Clubs" || card2.Name == "Ten Hearts")
+                /*while (card2.Name == "Ten Spades" || card2.Name == "Ten Diamonds" || card2.Name == "Ten Clubs" || card2.Name == "Ten Hearts")
                 {
                     randomCard2 = selectRandomCard(deck.getDeck(), random);
                     card2 = deck.getDeckCard(randomCard2);
-                }
+                }*/
                 deck.popCard(card2);
                 p.addUserCards(randomCard2); ;
 
@@ -66,11 +79,11 @@ namespace Blackjack
                 #region init banker
                 int randomCard3 = selectRandomCard(deck.getDeck(), random);
                 Card card3 = deck.getDeckCard(randomCard3);
-                while (card3.Name == "Ten Spades" || card3.Name == "Ten Diamonds" || card3.Name == "Ten Clubs" || card3.Name == "Ten Hearts")
+                /*while (card3.Name == "Ten Spades" || card3.Name == "Ten Diamonds" || card3.Name == "Ten Clubs" || card3.Name == "Ten Hearts")
                 {
                     randomCard3 = selectRandomCard(deck.getDeck(), random);
                     card3 = deck.getDeckCard(randomCard3);
-                }
+                }*/
                 deck.popCard(card3);
                 p.addUserCards(randomCard3);
 
@@ -78,11 +91,11 @@ namespace Blackjack
 
                 int randomCard4 = selectRandomCard(deck.getDeck(), random);
                 Card card4 = deck.getDeckCard(randomCard4);
-                while (card4.Name == "Ten Spades" || card4.Name == "Ten Diamonds" || card4.Name == "Ten Clubs" || card4.Name == "Ten Hearts")
+                /*while (card4.Name == "Ten Spades" || card4.Name == "Ten Diamonds" || card4.Name == "Ten Clubs" || card4.Name == "Ten Hearts")
                 {
                     randomCard4 = selectRandomCard(deck.getDeck(), random);
                     card4 = deck.getDeckCard(randomCard4);
-                }
+                }*/
                 deck.popCard(card4);
                 p.addUserCards(randomCard4);
 
@@ -163,11 +176,11 @@ namespace Blackjack
             p.resCardSum();
             int randomCard = selectRandomCard(deck.getDeck(), random);
             Card card = deck.getDeckCard(randomCard);
-            while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
+            /*while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
             {
                 randomCard = selectRandomCard(deck.getDeck(), random);
                 card = deck.getDeckCard(randomCard);
-            }
+            }*/
             p.addUserCards(randomCard);
 
             //player new card
@@ -214,11 +227,11 @@ namespace Blackjack
             {
                 int randomCard = selectRandomCard(deck.getDeck(), random);
                 Card card = deck.getDeckCard(randomCard);
-                while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
+                /*while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
                 {
                     randomCard = selectRandomCard(deck.getDeck(), random);
                     card = deck.getDeckCard(randomCard);
-                }
+                }*/
                 p.addUserCards(randomCard);
 
                 PictureBox p4 = new PictureBox();
@@ -310,11 +323,11 @@ namespace Blackjack
                 pBet = pBet * 2;
                 int randomCard = selectRandomCard(deck.getDeck(), random);
                 Card card = deck.getDeckCard(randomCard);
-                while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
+                /*while (card.Name == "Ten Spades" || card.Name == "Ten Diamonds" || card.Name == "Ten Clubs" || card.Name == "Ten Hearts")
                 {
                     randomCard = selectRandomCard(deck.getDeck(), random);
                     card = deck.getDeckCard(randomCard);
-                }
+                }*/
                 p.addUserCards(randomCard);
 
                 //player new card

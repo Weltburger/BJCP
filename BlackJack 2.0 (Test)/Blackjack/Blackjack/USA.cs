@@ -200,11 +200,11 @@ namespace Blackjack
                 Card card = deck.getDeckCard(randomCard);
                 p.addUserCards(randomCard);
 
-                if (p.containsUserCard(randomCard))
+                /*if (p.containsUserCard(randomCard))
                 {
                     randomCard = selectRandomCard(deck.getDeck(), random);
                 }
-                else randomCard = 1 * randomCard;
+                else randomCard = 1 * randomCard;*/
 
                 PictureBox p4 = new PictureBox();
                 p4.Width = 71;
@@ -213,7 +213,6 @@ namespace Blackjack
                 p4.ImageLocation = card.Image;
                 p4.SizeMode = PictureBoxSizeMode.AutoSize;
                 a.Controls.Add(p4);
-
 
                 b.addPlayerBox(p4);
 

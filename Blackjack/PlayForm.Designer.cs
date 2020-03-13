@@ -120,6 +120,7 @@
             // 
             // BankerLabelGame
             // 
+            this.BankerLabelGame.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BankerLabelGame.AutoSize = true;
             this.BankerLabelGame.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BankerLabelGame.ForeColor = System.Drawing.SystemColors.Control;
@@ -569,6 +570,7 @@
             // 
             // PlayerLblGame
             // 
+            this.PlayerLblGame.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.PlayerLblGame.AutoSize = true;
             this.PlayerLblGame.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PlayerLblGame.ForeColor = System.Drawing.SystemColors.Control;
@@ -646,6 +648,7 @@
             // 
             // PlayerScoreLbl
             // 
+            this.PlayerScoreLbl.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.PlayerScoreLbl.AutoSize = true;
             this.PlayerScoreLbl.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PlayerScoreLbl.ForeColor = System.Drawing.SystemColors.Control;
@@ -657,6 +660,7 @@
             // 
             // BankerScoreLbl
             // 
+            this.BankerScoreLbl.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BankerScoreLbl.AutoSize = true;
             this.BankerScoreLbl.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BankerScoreLbl.ForeColor = System.Drawing.SystemColors.Control;
@@ -668,6 +672,7 @@
             // 
             // BankerScore
             // 
+            this.BankerScore.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BankerScore.AutoSize = true;
             this.BankerScore.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BankerScore.ForeColor = System.Drawing.SystemColors.Control;
@@ -679,6 +684,7 @@
             // 
             // PlayerScore
             // 
+            this.PlayerScore.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.PlayerScore.AutoSize = true;
             this.PlayerScore.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PlayerScore.ForeColor = System.Drawing.SystemColors.Control;
@@ -715,7 +721,7 @@
             // bankerPhoto
             // 
             this.bankerPhoto.AllowFocused = false;
-            this.bankerPhoto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bankerPhoto.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.bankerPhoto.BorderRadius = 50;
             this.bankerPhoto.Image = ((System.Drawing.Image)(resources.GetObject("bankerPhoto.Image")));
             this.bankerPhoto.IsCircle = true;
@@ -730,7 +736,7 @@
             // yourPhoto
             // 
             this.yourPhoto.AllowFocused = false;
-            this.yourPhoto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.yourPhoto.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.yourPhoto.BorderRadius = 50;
             this.yourPhoto.Image = ((System.Drawing.Image)(resources.GetObject("yourPhoto.Image")));
             this.yourPhoto.IsCircle = true;

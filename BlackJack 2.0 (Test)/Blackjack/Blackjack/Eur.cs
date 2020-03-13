@@ -36,7 +36,6 @@ namespace Blackjack
                 this.initPlayer(a);
                 #endregion
 
-
                 #region init banker
                 int randomCard3 = selectRandomCard(deck.getDeck(), random);
                 /*while (p.containsUserCard(randomCard3))
