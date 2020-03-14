@@ -14,6 +14,7 @@ namespace Blackjack
         protected Player p;
         protected Random random;
         protected Deck deck;
+        protected int douCount;
 
         protected int pBet = 0;
 
@@ -106,6 +107,10 @@ namespace Blackjack
             p.playerNegSur();
             p.negBJState();
             b.negBJState();
+            if (GlobalData.gameType == 3)
+            {
+                douCount = 0;
+            }
             deck = new Deck();
             // Работа с кнопками
             a.StartBtnGame.Enabled = true;
@@ -211,7 +216,17 @@ namespace Blackjack
             p3.SizeMode = PictureBoxSizeMode.AutoSize;
             a.Controls.Add(p3);
             p.addPlayerBox(p3);
-            a.DoubleBtnGame.Enabled = false;
+            if(GlobalData.gameType == 3)
+            {
+                if (douCount < 1)
+                    douCount++;
+                else
+                    a.DoubleBtnGame.Enabled = false;
+            }
+            else
+            {
+                a.DoubleBtnGame.Enabled = false;
+            }
             a.InsuranceBtnGame.Enabled = false;
             a.SurrenderBtnGame.Enabled = false;
             p.sumPlayerCards();

@@ -16,6 +16,7 @@ namespace Blackjack
             this.p = new Player();
             this.random = new Random();
             this.deck = new Deck();
+            this.douCount = 0;
         }
 
         public void Start(PlayForm a)
