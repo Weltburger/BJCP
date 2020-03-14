@@ -130,25 +130,10 @@ namespace Blackjack
 
         protected virtual void initPlayer(PlayForm a)
         {
-            int randomCard1 = selectRandomCard(deck.getDeck(), random);
-            Card card1 = deck.getDeckCard(randomCard1); 
-            p.addUserCards(randomCard1);    
-            deck.popCard(card1);
-            int randomCard2 = selectRandomCard(deck.getDeck(), random);
-
-
-            while (p.containsUserCard(randomCard2))
-            {
-                randomCard2 = selectRandomCard(deck.getDeck(), random);
-            }
-            randomCard2 = 1 * randomCard2;
-
-            Card card2 = deck.getDeckCard(randomCard2); 
-            deck.popCard(card2);
-            p.addUserCards(randomCard2);    ;
-
-            p.addCardToPCardList(card1);    
-            p.addCardToPCardList(card2);    
+            Card card1 = retCard(deck);
+            p.addCardToPCardList(card1);
+            Card card2 = retCard(deck);
+            p.addCardToPCardList(card2);
 
             a.PlayerCard1Game.ImageLocation = card1.Image;
             a.PlayerCard1Game.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -163,17 +148,10 @@ namespace Blackjack
             a.DoubleBtnGame.Enabled = false;
             a.SurrenderBtnGame.Enabled = false;
             p.resCardSum();
-            int randomCard = selectRandomCard(deck.getDeck(), random);
-            Card card = deck.getDeckCard(randomCard);
-            p.addUserCards(randomCard);
 
-            if (p.containsUserCard(randomCard))
-            {
-                randomCard = selectRandomCard(deck.getDeck(), random);
-            }
-            else randomCard = 1 * randomCard;
-
-            //player new card
+            Card card = retCard(deck);
+            p.addCardToPCardList(card);
+            
             PictureBox p3 = new PictureBox();
             p3.Width = 71;
             p3.Height = 96;
@@ -181,11 +159,7 @@ namespace Blackjack
             p3.ImageLocation = card.Image;
             p3.SizeMode = PictureBoxSizeMode.AutoSize;
             a.Controls.Add(p3);
-
             p.addPlayerBox(p3);
-
-            p.addCardToPCardList(card);
-            deck.popCard(card);
             p.sumPlayerCards();
         }
 
@@ -225,17 +199,10 @@ namespace Blackjack
         protected virtual void doubleX2(PlayForm a)
         {
             pBet = pBet * 2;
-            int randomCard = selectRandomCard(deck.getDeck(), random);
-            Card card = deck.getDeckCard(randomCard);
-            p.addUserCards(randomCard);
 
-            if (p.containsUserCard(randomCard))
-            {
-                randomCard = selectRandomCard(deck.getDeck(), random);
-            }
-            else randomCard = 1 * randomCard;
-
-            //player new card
+            Card card = retCard(deck);
+            p.addCardToPCardList(card);
+            
             PictureBox p3 = new PictureBox();
             p3.Width = 71;
             p3.Height = 96;
@@ -243,15 +210,19 @@ namespace Blackjack
             p3.ImageLocation = card.Image;
             p3.SizeMode = PictureBoxSizeMode.AutoSize;
             a.Controls.Add(p3);
-
             p.addPlayerBox(p3);
-
-            p.addCardToPCardList(card);
-            deck.popCard(card);
             a.DoubleBtnGame.Enabled = false;
             a.InsuranceBtnGame.Enabled = false;
             a.SurrenderBtnGame.Enabled = false;
             p.sumPlayerCards();
+        }
+
+        protected virtual Card retCard(Deck deck)
+        {
+            int randomCard = selectRandomCard(deck.getDeck(), random);
+            Card card = deck.getDeckCard(randomCard);
+            deck.popCard(card);
+            return card;
         }
     }
 }

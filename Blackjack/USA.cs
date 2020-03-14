@@ -33,66 +33,22 @@ namespace Blackjack
                 b.resCardSum();
 
                 #region init player
-                /*int randomCard1 = selectRandomCard(deck.getDeck(), random);
-                Card card1 = deck.getDeckCard(randomCard1); //deck[randomCard1];
-                p.addUserCards(randomCard1);    //usedCards.Add(randomCard1);
-                deck.popCard(card1);
-                int randomCard2 = selectRandomCard(deck.getDeck(), random);
 
-
-                while (p.containsUserCard(randomCard2))
-                {
-                    randomCard2 = selectRandomCard(deck.getDeck(), random);
-                }
-                randomCard2 = 1 * randomCard2;
-
-                Card card2 = deck.getDeckCard(randomCard2); //deck[randomCard2];
-                deck.popCard(card2);
-                p.addUserCards(randomCard2);    //usedCards.Add(randomCard2);
-
-                p.addCardToPCardList(card1);    //playercardList.Add(card1);
-                p.addCardToPCardList(card2);    //playercardList.Add(card2);
-
-                a.PlayerCard1Game.ImageLocation = card1.Image;
-                a.PlayerCard1Game.SizeMode = PictureBoxSizeMode.AutoSize;
-
-                a.PlayerCard2Game.ImageLocation = card2.Image;
-                a.PlayerCard2Game.SizeMode = PictureBoxSizeMode.AutoSize;*/
                 this.initPlayer(a);
+
                 #endregion
 
                 #region init banker
-                int randomCard3 = selectRandomCard(deck.getDeck(), random);
-                while (p.containsUserCard(randomCard3))
-                {
-                    randomCard3 = selectRandomCard(deck.getDeck(), random);
-                }
-                randomCard3 = 1 * randomCard3;
 
-                Card card3 = deck.getDeckCard(randomCard3);   //deck[randomCard3];
-                deck.popCard(card3);
-                p.addUserCards(randomCard3);
-
+                Card card3 = retCard(deck);
                 b.addCardToPCardList(card3);
 
-                int randomCard4 = selectRandomCard(deck.getDeck(), random);
-                while (p.containsUserCard(randomCard4))
-                {
-                    randomCard4 = selectRandomCard(deck.getDeck(), random);
-                }
-                randomCard4 = 1 * randomCard4;
-
-                Card card4 = deck.getDeckCard(randomCard4);   //deck[randomCard4];
-                deck.popCard(card4);
-                p.addUserCards(randomCard4);
-
+                Card card4 = retCard(deck);
                 b.addCardToPCardList(card4);
 
                 a.BankerCard1Game.ImageLocation = card3.Image;
                 a.BankerCard1Game.SizeMode = PictureBoxSizeMode.AutoSize;
                 displayCardBack(a.BankerCard2Game);
-                //a.pictureBox3.ImageLocation = card4.Image;
-                //a.pictureBox3.SizeMode = PictureBoxSizeMode.AutoSize;
 
                 #endregion
 
@@ -196,15 +152,8 @@ namespace Blackjack
 
             while (b.getCardSum() <= 16)
             {
-                int randomCard = selectRandomCard(deck.getDeck(), random);
-                Card card = deck.getDeckCard(randomCard);
-                p.addUserCards(randomCard);
-
-                if (p.containsUserCard(randomCard))
-                {
-                    randomCard = selectRandomCard(deck.getDeck(), random);
-                }
-                else randomCard = 1 * randomCard;
+                Card card = retCard(deck);
+                b.addCardToPCardList(card);
 
                 PictureBox p4 = new PictureBox();
                 p4.Width = 71;
@@ -213,12 +162,7 @@ namespace Blackjack
                 p4.ImageLocation = card.Image;
                 p4.SizeMode = PictureBoxSizeMode.AutoSize;
                 a.Controls.Add(p4);
-
-
                 b.addPlayerBox(p4);
-
-                b.addCardToPCardList(card);
-                deck.popCard(card);
                 b.sumPlayerCards();
             }
             if (p.isPlSur())
