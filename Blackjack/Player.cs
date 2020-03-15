@@ -9,7 +9,7 @@ namespace Blackjack
 {
     public class Player : Member
     {
-        private List<int> usedCards;
+        //private List<int> usedCards;
         private bool sur;
         private string name;
         private IniFiles INI;
@@ -18,7 +18,7 @@ namespace Blackjack
         {
             cardList = new List<Card>();
             this.name = GlobalData.PlayerName;
-            this.usedCards = new List<int>();
+            //this.usedCards = new List<int>();
             this.playerbox = new List<PictureBox>();
             INI = new IniFiles(name + ".ini");
             this.money = Convert.ToInt32(INI.ReadINI("User Information", "Money"));
@@ -26,7 +26,7 @@ namespace Blackjack
             GlobalData.money = this.money;
         }
 
-        public void clearUserCards()
+        /*public void clearUserCards()
         {
             this.usedCards.Clear();
         }
@@ -39,6 +39,15 @@ namespace Blackjack
         public bool containsUserCard(int a)
         {
             return this.usedCards.Contains(a);
+        }*/
+
+        public int getCardCount()
+        {
+            return cardList.Count();
+        }
+        public Card getCard(int a)
+        {
+            return cardList[a];
         }
 
         public void playerSur()

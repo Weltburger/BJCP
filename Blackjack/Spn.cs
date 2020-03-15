@@ -17,6 +17,7 @@ namespace Blackjack
             this.random = new Random();
             this.deck = new Deck();
             this.douCount = 0;
+            this.spnSpec = false;
         }
 
         public void Start(PlayForm a)
@@ -74,6 +75,7 @@ namespace Blackjack
                 if (b.gotAce())
                 {
                     a.InsuranceBtnGame.Enabled = true;
+                    a.SurrenderBtnGame.Enabled = true;
                 }
                 else if (p.getCardSum() == 21)
                 {
@@ -97,13 +99,16 @@ namespace Blackjack
                 else if (p.getCardSum() >= 9 && p.getCardSum() <= 13)
                 {
                     a.DoubleBtnGame.Enabled = true;
+                    a.SurrenderBtnGame.Enabled = true;
                 }
                 else if (b.getDCard(0).Value == 10)
                 {
+                    a.SurrenderBtnGame.Enabled = true;
                     if (b.checkBlackJack()) // Banker's BJ check
                     {
                         if (p.checkBlackJack()) // Player's BJ check
                         {
+                            a.SurrenderBtnGame.Enabled = false;
                             a.BankerCard2Game.ImageLocation = b.getDCard(1).Image;
                             p.updStats(1, 3, (pBet*3)/2);
                             Notification.Show("You win! 3/2", NotifType.Confirm);
@@ -112,6 +117,7 @@ namespace Blackjack
                         }
                         else
                         {
+                            a.SurrenderBtnGame.Enabled = false;
                             a.BankerCard2Game.ImageLocation = b.getDCard(1).Image;
                             p.updStats(0, 3, pBet);
                             Notification.Show("You lose! Banker has got BLACKJACK!", NotifType.Error); 
@@ -119,6 +125,10 @@ namespace Blackjack
                             a.ResetBtnGame.Enabled = true;//resetGame(a);
                         }
                     }
+                }
+                else
+                {
+                    a.SurrenderBtnGame.Enabled = true;
                 }
             }
         }
@@ -182,50 +192,33 @@ namespace Blackjack
                 }
                 else
                 {
-                    if (b.getCardSum() > 21)
+                    if (douCount == 0)
                     {
-                        p.updStats(1, 3, pBet);
-                        Notification.Show("You win!", NotifType.Confirm); 
-                        a.ResetBtnGame.Enabled = true;//resetGame(a);
-                    }
-                    else if (p.getCardSum() <= b.getCardSum())
-                    {
-                        p.updStats(0, 3, pBet); ;
-                        Notification.Show("You lose!", NotifType.Error);
-                        a.ResetBtnGame.Enabled = true;//resetGame(a);
+                        specialRules(a);
+                        if (!spnSpec)
+                            usualRules(a);
                     }
                     else
                     {
-                        p.updStats(1, 3, pBet);
-                        Notification.Show("You win!", NotifType.Confirm); 
-                        a.ResetBtnGame.Enabled = true;//resetGame(a);
+                        usualRules(a);
                     }
                 }
             }
             else
             {
-                if (b.getCardSum() > 21)
+                if (douCount == 0)
                 {
-                    p.updStats(1, 3, pBet);
-                    Notification.Show("You win!", NotifType.Confirm); 
-                    a.ResetBtnGame.Enabled = true;//resetGame(a);
-                }
-                else if (p.getCardSum() <= b.getCardSum())
-                {
-                    p.updStats(0, 3, pBet);
-                    Notification.Show("You lose!", NotifType.Error); 
-                    a.ResetBtnGame.Enabled = true;//resetGame(a);
+                    specialRules(a);
+                    if (!spnSpec)
+                        usualRules(a);
                 }
                 else
                 {
-                    p.updStats(1, 3, pBet);
-                    Notification.Show("You win!", NotifType.Confirm); 
-                    a.ResetBtnGame.Enabled = true;//resetGame(a);
+                    usualRules(a);
                 }
             }
 
             this.showScore(a);
-
         }
 
         public void Insurance(PlayForm a)
@@ -264,6 +257,73 @@ namespace Blackjack
             else
             {
                 Notification.Show("You don't have that amount of money!", NotifType.Warning); 
+            }
+        }
+
+        public void specialRules(PlayForm a)
+        {
+            if ((p.getCardCount() == 3 &&
+                            ((p.getCard(0).Value == 6 && p.getCard(1).Value == 7 && p.getCard(2).Value == 8) ||
+                            (p.getCard(0).Value == 6 && p.getCard(1).Value == 8 && p.getCard(2).Value == 7) ||
+                            (p.getCard(0).Value == 8 && p.getCard(1).Value == 7 && p.getCard(2).Value == 6) ||
+                            (p.getCard(0).Value == 8 && p.getCard(1).Value == 6 && p.getCard(2).Value == 7) ||
+                            (p.getCard(0).Value == 7 && p.getCard(1).Value == 8 && p.getCard(2).Value == 6) ||
+                            (p.getCard(0).Value == 7 && p.getCard(1).Value == 6 && p.getCard(2).Value == 8))))
+            {
+                p.updStats(1, 3, pBet * 2);
+                Notification.Show("You win! Combination of 6, 7 and 8 cards!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+                spnSpec = true;
+            }
+            else if (p.getCardCount() == 3 && p.getCard(0).Value == 7 && p.getCard(1).Value == 7 && p.getCard(2).Value == 7)
+            {
+                p.updStats(1, 3, pBet * 3);
+                Notification.Show("You win! Combination of 3 cards valued as 7!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+                spnSpec = true;
+            }
+            else if (p.getCardCount() == 5 && p.getCardSum() == 21)
+            {
+                p.updStats(1, 3, Convert.ToInt32(3 * pBet / 2));
+                Notification.Show("You win! Combination of 5 cards!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+                spnSpec = true;
+            }
+            else if (p.getCardCount() == 6 && p.getCardSum() == 21)
+            {
+                p.updStats(1, 3, pBet * 2);
+                Notification.Show("You win! Combination of 5 cards!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+                spnSpec = true;
+            }
+            else if (p.getCardCount() == 7 && p.getCardSum() == 21)
+            {
+                p.updStats(1, 3, pBet * 3);
+                Notification.Show("You win! Combination of 5 cards!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+                spnSpec = true;
+            }
+        }
+
+        public void usualRules(PlayForm a)
+        {
+            if (b.getCardSum() > 21)
+            {
+                p.updStats(1, 3, pBet);
+                Notification.Show("You win!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+            }
+            else if (p.getCardSum() <= b.getCardSum())
+            {
+                p.updStats(0, 3, pBet);
+                Notification.Show("You lose!", NotifType.Error);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
+            }
+            else
+            {
+                p.updStats(1, 3, pBet);
+                Notification.Show("You win!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;//resetGame(a);
             }
         }
     }

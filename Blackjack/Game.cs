@@ -15,6 +15,7 @@ namespace Blackjack
         protected Random random;
         protected Deck deck;
         protected int douCount;
+        protected bool spnSpec;
 
         protected int pBet = 0;
 
@@ -103,7 +104,7 @@ namespace Blackjack
             b.resCardSum();
             p.clearCardList();
             b.clearCardList();
-            p.clearUserCards();
+            //p.clearUserCards();
             p.playerNegSur();
             p.negBJState();
             b.negBJState();
@@ -194,8 +195,10 @@ namespace Blackjack
             p.sumPlayerCards();
             this.showScore(a);
             a.InsuranceBtnGame.Enabled = false;
+            a.DealBtnGame.Enabled = false;
             a.DoubleBtnGame.Enabled = false;
             a.SurrenderBtnGame.Enabled = false;
+            a.EndBtnGame.Enabled = false;
             Notification.Show("You surrendered!", NotifType.Error);
             p.updStats(0, 1, pBet / 2);
             a.ResetBtnGame.Enabled = true;
