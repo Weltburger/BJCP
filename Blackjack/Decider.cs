@@ -31,6 +31,7 @@ namespace Blackjack
         {
             if (GlobalData.gameType == 0 || GlobalData.gameType == 1)
             {
+                GlobalData.gameType = 1;
                 return getUSA();
             }
             else if (GlobalData.gameType == 2)

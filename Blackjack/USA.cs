@@ -147,7 +147,6 @@ namespace Blackjack
         public void End(PlayForm a)
         {
             this.endUpButScore(a);
-
             a.BankerCard2Game.ImageLocation = b.getDCard(1).Image; // Открытие второй закрытой карты банкира
 
             while (b.getCardSum() <= 16)
@@ -155,15 +154,7 @@ namespace Blackjack
                 Card card = retCard(deck);
                 b.addCardToPCardList(card);
 
-                PictureBox p4 = new PictureBox();
-                p4.Width = 71;
-                p4.Height = 96;
-                p4.Location = new Point(324 + 100 + b.getplayerBoxCount() * 100, 156);
-                p4.ImageLocation = card.Image;
-                p4.SizeMode = PictureBoxSizeMode.AutoSize;
-                a.Controls.Add(p4);
-                b.addPlayerBox(p4);
-                b.sumPlayerCards();
+                takingCards(a, card);
             }
             if (p.isPlSur())
             {
@@ -175,46 +166,12 @@ namespace Blackjack
                 }
                 else
                 {
-                    if (b.getCardSum() > 21)
-                    {
-                        p.updStats(1, 1, pBet);
-                        Notification.Show("Dealer has got BLACKJACK, but You win!", NotifType.Confirm); 
-                        a.ResetBtnGame.Enabled = true;
-                    }
-                    else if (p.getCardSum() <= b.getCardSum())
-                    {
-                        p.updStats(0, 1, pBet);
-                        Notification.Show("You lose!", NotifType.Error); 
-                        a.ResetBtnGame.Enabled = true;
-                    }
-                    else
-                    {
-                        p.updStats(1, 1, pBet);
-                        Notification.Show("You win!", NotifType.Confirm); 
-                        a.ResetBtnGame.Enabled = true;
-                    }
+                    usualRules(a, GlobalData.gameType);
                 }
             }
             else
             {
-                if (b.getCardSum() > 21)
-                {
-                    p.updStats(1, 1, pBet);
-                    Notification.Show("You win!", NotifType.Confirm); 
-                    a.ResetBtnGame.Enabled = true;
-                }
-                else if (p.getCardSum() <= b.getCardSum())
-                {
-                    p.updStats(0, 1, pBet);
-                    Notification.Show("You lose!", NotifType.Error);
-                    a.ResetBtnGame.Enabled = true;
-                }
-                else
-                {
-                    p.updStats(1, 1, pBet);
-                    Notification.Show("You win!", NotifType.Confirm); 
-                    a.ResetBtnGame.Enabled = true;
-                }
+                usualRules(a, GlobalData.gameType);
             }
 
             this.showScore(a);

@@ -164,7 +164,6 @@ namespace Blackjack
         public void End(PlayForm a)
         {
             this.endUpButScore(a);
-
             a.BankerCard2Game.ImageLocation = b.getDCard(1).Image; // Открытие второй закрытой карты банкира
 
             while (b.getCardSum() <= 16)
@@ -172,15 +171,7 @@ namespace Blackjack
                 Card card = retCard(deck);
                 b.addCardToPCardList(card);
 
-                PictureBox p4 = new PictureBox();
-                p4.Width = 71;
-                p4.Height = 96;
-                p4.Location = new Point(324 + 100 + b.getplayerBoxCount() * 100, 156);
-                p4.ImageLocation = card.Image;
-                p4.SizeMode = PictureBoxSizeMode.AutoSize;
-                a.Controls.Add(p4);
-                b.addPlayerBox(p4);
-                b.sumPlayerCards();
+                takingCards(a, card);
             }
             if (p.isPlSur())
             {
@@ -196,11 +187,11 @@ namespace Blackjack
                     {
                         specialRules(a);
                         if (!spnSpec)
-                            usualRules(a);
+                            usualRules(a, GlobalData.gameType);
                     }
                     else
                     {
-                        usualRules(a);
+                        usualRules(a, GlobalData.gameType);
                     }
                 }
             }
@@ -210,11 +201,11 @@ namespace Blackjack
                 {
                     specialRules(a);
                     if (!spnSpec)
-                        usualRules(a);
+                        usualRules(a, GlobalData.gameType);
                 }
                 else
                 {
-                    usualRules(a);
+                    usualRules(a, GlobalData.gameType);
                 }
             }
 
@@ -302,28 +293,6 @@ namespace Blackjack
                 Notification.Show("You win! Combination of 5 cards!", NotifType.Confirm);
                 a.ResetBtnGame.Enabled = true;//resetGame(a);
                 spnSpec = true;
-            }
-        }
-
-        public void usualRules(PlayForm a)
-        {
-            if (b.getCardSum() > 21)
-            {
-                p.updStats(1, 3, pBet);
-                Notification.Show("You win!", NotifType.Confirm);
-                a.ResetBtnGame.Enabled = true;//resetGame(a);
-            }
-            else if (p.getCardSum() <= b.getCardSum())
-            {
-                p.updStats(0, 3, pBet);
-                Notification.Show("You lose!", NotifType.Error);
-                a.ResetBtnGame.Enabled = true;//resetGame(a);
-            }
-            else
-            {
-                p.updStats(1, 3, pBet);
-                Notification.Show("You win!", NotifType.Confirm);
-                a.ResetBtnGame.Enabled = true;//resetGame(a);
             }
         }
     }

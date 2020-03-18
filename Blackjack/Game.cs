@@ -242,5 +242,43 @@ namespace Blackjack
             deck.popCard(card);
             return card;
         }
+
+        protected void usualRules(PlayForm a, int gameType)
+        {
+            if (b.getCardSum() > 21)
+            {
+                p.updStats(1, gameType, pBet);
+                Notification.Show("You win!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;
+            }
+            else if (p.getCardSum() <= b.getCardSum())
+            {
+                p.updStats(0, gameType, pBet);
+                Notification.Show("You lose!", NotifType.Error);
+                a.ResetBtnGame.Enabled = true;
+            }
+            else
+            {
+                p.updStats(1, gameType, pBet);
+                Notification.Show("You win!", NotifType.Confirm);
+                a.ResetBtnGame.Enabled = true;
+            }
+        }
+
+        protected void takingCards(PlayForm a, Card card)
+        {
+            PictureBox p4 = new PictureBox();
+            p4.Width = 71;
+            p4.Height = 96;
+            if (GlobalData.gameType != 2)
+                p4.Location = new Point(324 + 100 + b.getplayerBoxCount() * 100, 156);
+            else
+                p4.Location = new Point(324 + b.getplayerBoxCount() * 100, 156);
+            p4.ImageLocation = card.Image;
+            p4.SizeMode = PictureBoxSizeMode.AutoSize;
+            a.Controls.Add(p4);
+            b.addPlayerBox(p4);
+            b.sumPlayerCards();
+        }
     }
 }

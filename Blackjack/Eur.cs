@@ -115,15 +115,7 @@ namespace Blackjack
                 Card card = retCard(deck);
                 b.addCardToPCardList(card);
 
-                PictureBox p4 = new PictureBox();
-                p4.Width = 71;
-                p4.Height = 96;
-                p4.Location = new Point(324 + b.getplayerBoxCount() * 100, 156);
-                p4.ImageLocation = card.Image;
-                p4.SizeMode = PictureBoxSizeMode.AutoSize;
-                a.Controls.Add(p4);
-                b.addPlayerBox(p4);
-                b.sumPlayerCards();
+                takingCards(a, card);
             }
             if (p.isPlSur())
             {
@@ -135,24 +127,7 @@ namespace Blackjack
                 }
                 else
                 {
-                    if (b.getCardSum() > 21)
-                    {
-                        p.updStats(1, 2, pBet);
-                        Notification.Show("You win!", NotifType.Confirm);
-                        a.ResetBtnGame.Enabled = true;
-                    }
-                    else if (p.getCardSum() <= b.getCardSum())
-                    {
-                        p.updStats(0, 2, pBet);
-                        Notification.Show("You lose!", NotifType.Error);
-                        a.ResetBtnGame.Enabled = true; 
-                    }
-                    else
-                    {
-                        p.updStats(1, 2, pBet);
-                        Notification.Show("You win!", NotifType.Confirm);
-                        a.ResetBtnGame.Enabled = true; 
-                    }
+                    usualRules(a, GlobalData.gameType);
                 }
             }
             else
@@ -173,24 +148,7 @@ namespace Blackjack
                 }
                 else
                 {
-                    if (b.getCardSum() > 21)
-                    {
-                        p.updStats(1, 2, pBet);
-                        Notification.Show("You win!", NotifType.Confirm);
-                        a.ResetBtnGame.Enabled = true; 
-                    }
-                    else if (p.getCardSum() <= b.getCardSum())
-                    {
-                        p.updStats(0, 2, pBet);
-                        Notification.Show("You lose!", NotifType.Error);
-                        a.ResetBtnGame.Enabled = true; 
-                    }
-                    else
-                    {
-                        p.updStats(1, 2, pBet);
-                        Notification.Show("You win!", NotifType.Confirm);
-                        a.ResetBtnGame.Enabled = true; 
-                    }
+                    usualRules(a, GlobalData.gameType);
                 }
             }
 
@@ -230,7 +188,6 @@ namespace Blackjack
             }
 
             a.PlayerScore.Text = Convert.ToString(p.getCardSum());
-
         }
     }
 }
