@@ -195,7 +195,7 @@ namespace Blackjack
         private void DonateLbl_Click(object sender, EventArgs e)
         {
             rep = new Replenishment();
-            pages.SetPage(5);
+            pages.SetPage(4);
         }
 
         private void USDLbl_KeyPress(object sender, KeyPressEventArgs e)
